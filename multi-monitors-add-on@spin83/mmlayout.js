@@ -113,15 +113,17 @@ var MultiMonitorsLayoutManager = class MultiMonitorsLayoutManager {
 			        }
 			        
 			        let size = this.panelBox.height;
-
+				let enabled_hotCorners = [1];
 			        for (let i = 0; i < this.monitors.length; i++) {
-			            let monitor = this.monitors[i];
-			            let cornerX = this._rtl ? monitor.x + monitor.width : monitor.x;
-			            let cornerY = monitor.y;
+				    if(~enabled_hotCorners.indexOf(i)) {
+			            	let monitor = this.monitors[i];
+			            	let cornerX = this._rtl ? monitor.x + monitor.width : monitor.x;
+			            	let cornerY = monitor.y;
 	
-		                let corner = new Layout.HotCorner(this, monitor, cornerX, cornerY);
-		                corner.setBarrierSize(size);
-		                this.hotCorners.push(corner);
+		                    	let corner = new Layout.HotCorner(this, monitor, cornerX, cornerY);
+		                    	corner.setBarrierSize(size);
+		                    	this.hotCorners.push(corner);
+				    }
 			        }
 
 			        this.emit('hot-corners-changed');
